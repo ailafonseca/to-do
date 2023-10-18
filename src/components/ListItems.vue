@@ -1,7 +1,7 @@
 <template>
-  <div class="row">
+  <div class="row" id="center">
     <div class="col-10">
-      <div class="input-group input-group-lg mb-3">
+      <div class="input-group mb-3">
         <input
           v-model="newTask"
           type="text"
@@ -10,15 +10,16 @@
           aria-describedby="inputGroup-sizing-lg"
           placeholder="Write your goal!"
           id="input"
+          @keyup.enter="addNewTask"
         />
         <div class="input-group-append mx-3">
-          <button @click="addNewTask" class="btn btn-info" type="button">Add</button>
-          <button @click="deleteAllTasks" type="button" class="btn btn-danger ms-3">Delete List</button>
+          <button @click="addNewTask" :disabled="!newTask.length" class="btn btn-info" type="button">Add</button>
+          <button @click="deleteAllTasks" :disabled="!tasks.length" type="button" class="btn btn-danger ms-3">Delete List</button>
         </div>
       </div>
     </div>
-    <div class="row" id="border" v-for="(task, i) in tasks" :key="i">
-      <div class="col">{{ task }}</div>
+    <div class="row" v-for="(task, i) in tasks" :key="i">
+      <div class="col" id="border">{{ task }}</div>
       <div class="col-auto">
         <button @click="editTask(i)" type="button" class="btn btn-warning"> 
           <i class="bi bi-pencil-square"/>  
@@ -33,6 +34,11 @@
 
 <style>
 
+#center{
+  display: flex;
+  justify-content: center;
+}
+
 #input{
   border: 2px solid rgb(156, 156, 156);
   font-size: 20px;
@@ -42,13 +48,14 @@
 }
 
 #border {
-  border-top: 1px solid rgb(156, 156, 156);
+  border: 1px solid rgb(156, 156, 156);
   padding: 10px;
   margin: 0.04px;
   margin-left: 10px;
   background-color: white;
-  width: 100%;
-  text-wrap: balance;
+  max-width: 100%;
+  inline-size: 300px;
+  overflow-wrap: break-word;
 }
 
 </style>
@@ -60,7 +67,9 @@ const tasks = ref<string[]>([])
 let isEditing = ref(false)
 let selectedIndex = ref(-1)
 
+
 const addNewTask = () => {
+  //if (newTask.value.length < 1) return
   if (isEditing.value) {
     tasks.value[selectedIndex.value] = newTask.value // input -> array
     newTask.value = ''
@@ -69,6 +78,7 @@ const addNewTask = () => {
     tasks.value.push(newTask.value)
     newTask.value = ''
   }
+
 }
 
 const editTask = (i) => {

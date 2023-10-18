@@ -4,7 +4,7 @@ import ListItems from './components/ListItems.vue'
 
 <template>
   <header>
-   <h1 class="text-center m-5 display-5"> My To-Do List </h1> 
+   <h1 class="text-center m-5"> My To-Do List </h1> 
   </header>
 
   <main>
