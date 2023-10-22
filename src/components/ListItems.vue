@@ -1,49 +1,66 @@
 <template>
-  <div class="input-group mb-3">
-    <input
-      v-model="newTask"
-      type="text"
-      class="form-control"
-      aria-label="Sizing example input"
-      aria-describedby="inputGroup-sizing-lg"
-      placeholder="Write your goal!"
-      id="input"
-      @keyup.enter="addNewTask"
-    />
-    <button
-      class="input-group-text"
-      @click="cancelNewTask"
-      :disabled="!newTask.length"
-      id="cancel-button"
-    >
-      <i class="bi bi-x-square-fill"></i>
-    </button>
-    <div class="input-group-append mx-3">
-      <button @click="addNewTask" :disabled="!newTask.length" class="btn btn-info" type="button">
-        Add
+  <div
+    class="d-flex flex-md-row flex-column align-items-center justify-content-center mb-md-5 mb-2"
+  >
+    <div class="input-group m-md-3 px-2">
+      <input
+        v-model="newTask"
+        type="text"
+        class="form-control"
+        aria-label="Sizing example input"
+        placeholder="Write your goal!"
+        @keyup.enter="addNewTask"
+        style="border-right: 0px; outline: 0px"
+      />
+      <button class="btn border border-start-0" @click="cancelNewTask" :disabled="!newTask.length">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+    <div class="d-flex flex-md-row justify-content-center mt-md-0 mt-3 mx-md-3 w-100">
+      <button
+        @click="addNewTask"
+        :disabled="!newTask.length"
+        type="button"
+        class="btn btn-info me-1 text-nowrap col"
+      >
+        Add Item
       </button>
       <button
         @click="deleteAllTasks"
         :disabled="!tasks.length"
         type="button"
-        class="btn btn-danger ms-3"
+        class="btn btn-danger text-nowrap col"
       >
-        Delete All Goals
+        Delete List
       </button>
     </div>
   </div>
 
-  <div class="d-flex m-2" v-for="(task, i) in tasks" :key="i">
-    <div class="form-check col">
-      <input class="form-check-input" type="checkbox" v-model="checkedTask[i]" />
-      <p :class="['border border-2 text-break', checkedTask[i] ? 'text-decoration-line-through' : '']">{{ task }}</p>
+  <div class="d-flex" v-for="(task, i) in tasks" :key="i">
+    <div class="form-check ms-3 mt-1 col">
+      <input
+        class="form-check-input"
+        style="width: 20px; height: 25px"
+        type="checkbox"
+        v-model="checkedTask[i]"
+      />
+      <p
+        :class="[
+          'border border-2 text-break justify-content-center p-md-2 p-1 fs-6',
+          checkedTask[i] ? 'text-decoration-line-through' : ''
+        ]"
+      >
+        {{ task }}
+      </p>
     </div>
-    <button @click="editTask(i)" type="button" class="btn btn-warning">
-      <i class="bi bi-pencil-square" />
-    </button>
-    <button @click="deleteTask(i)" type="button" class="btn btn-danger ms-3">
-      <i class="bi bi-trash"></i>
-    </button>
+    <div>
+      <button @click="editTask(i)" type="button" class="btn btn-outline-warning ms-md-3">
+        <i class="bi bi-pencil-square" />
+      </button>
+      <button @click="deleteTask(i)" type="button" class="btn btn-outline-danger mx-md-3">
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
   </div>
 </template>
 
