@@ -15,8 +15,7 @@
       <button class="btn border border-start-0" @click="cancelNewTask" :disabled="!newTask.length">
         <i class="bi bi-x"></i>
       </button>
-    </div>
-    <div class="d-flex flex-md-row justify-content-center mt-md-0 mt-3 mx-md-3 w-100">
+      <div class="justify-content-center ">
       <button
         @click="addNewTask"
         :disabled="!newTask.length"
@@ -34,6 +33,8 @@
         Delete List
       </button>
     </div>
+    </div>
+    
   </div>
 
   <div class="d-flex" v-for="(task, i) in tasks" :key="i">
