@@ -85,13 +85,13 @@ const addNewTask = () => {
   }
 }
 
-const editTask = (i) => {
+const editTask = (i: number) => {
   newTask.value = tasks.value[i] // array -> input
   isEditing.value = true
   selectedIndex.value = i
 }
 
-const deleteTask = (i) => {
+const deleteTask = (i:number) => {
   tasks.value.splice(i, 1)
 }
 
