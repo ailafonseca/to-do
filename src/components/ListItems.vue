@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-flex flex-md-row flex-column align-items-center justify-content-center mb-md-5 mb-2"
+    class="d-flex flex-md-row flex-column align-items-center justify-content-center mb-md-5 mb-2 bg-light"
   >
     <div class="input-group m-md-3 px-2">
       <input
@@ -15,7 +15,9 @@
       <button class="btn border border-start-0" @click="cancelNewTask" :disabled="!newTask.length">
         <i class="bi bi-x"></i>
       </button>
-      <div class="justify-content-center ">
+
+    </div>
+    <div class="justify-content-center d-flex flex-row m-2">
       <button
         @click="addNewTask"
         :disabled="!newTask.length"
@@ -32,7 +34,6 @@
       >
         Delete List
       </button>
-    </div>
     </div>
     
   </div>
